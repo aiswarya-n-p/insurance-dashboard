@@ -1,0 +1,81 @@
+let policies = []
+
+async function loadPolicies(){
+
+const response = await fetch("/api/policies")
+policies = await response.json()
+
+renderCards()
+
+}
+
+function renderCards(){
+
+let container = document.getElementById("cardsContainer")
+
+container.innerHTML=""
+
+let category = document.getElementById("filterCategory").value
+let sort = document.getElementById("sortOption").value
+
+let data = [...policies]
+
+if(category !== "All"){
+data = data.filter(p=>p.category === category)
+}
+
+if(sort==="name"){
+data.sort((a,b)=>a.name.localeCompare(b.name))
+}
+
+if(sort==="balance"){
+data.sort((a,b)=>a.remaining_balance - b.remaining_balance)
+}
+
+data.forEach(p=>{
+
+let percent = (p.used_amount/p.total_limit)*100
+
+let color = "bg-success"
+
+if(percent>50) color="bg-warning"
+if(percent>80) color="bg-danger"
+
+let card = `
+<div class="col-md-4 mb-4">
+
+<div class="card shadow">
+
+<div class="card-body">
+
+<h5>${p.name}</h5>
+
+<p>Total Limit: ${p.total_limit}</p>
+<p>Used Amount: ${p.used_amount}</p>
+<p>Remaining Balance: ${p.remaining_balance}</p>
+
+<div class="progress">
+
+<div class="progress-bar ${color}" style="width:${percent}%"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+`
+
+container.innerHTML += card
+
+})
+
+}
+
+document.getElementById("filterCategory").addEventListener("change",renderCards)
+document.getElementById("sortOption").addEventListener("change",renderCards)
+
+loadPolicies()
+
+setInterval(loadPolicies,5000)

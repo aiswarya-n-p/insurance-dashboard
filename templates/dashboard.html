@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- LOGIN SECTION -->
+
+<div id="loginSection" class="row justify-content-center">
+
+<div class="col-md-4">
+
+<div class="card shadow p-4">
+
+<h4 class="text-center mb-3">Customer Login</h4>
+
+<input id="customerId" class="form-control mb-3" placeholder="Customer ID">
+
+<input id="password" type="password" class="form-control mb-3" placeholder="Password">
+
+<button class="btn btn-primary w-100" onclick="login()">Login</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DASHBOARD SECTION -->
+
+<div id="dashboardSection" style="display:none;">
+
+<div class="header">
+
+<h3 id="customerName">Welcome</h3>
+
+</div>
+
+
+<div class="row mb-4">
+
+<div class="col-md-4">
+
+<div class="kpi-card">
+<p>Total Policies</p>
+<p class="kpi-number" id="totalPolicies">0</p>
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="kpi-card">
+<p>Total Used Amount</p>
+<p class="kpi-number" id="totalUsed">0</p>
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="kpi-card">
+<p>Total Remaining Coverage</p>
+<p class="kpi-number" id="totalRemaining">0</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="row mb-4">
+
+<div class="col-md-3">
+
+<select id="filterCategory" class="form-select">
+
+<option value="All">All Categories</option>
+<option value="Personal">Personal</option>
+<option value="Business">Business</option>
+
+</select>
+
+</div>
+
+<div class="col-md-3">
+
+<select id="sortOption" class="form-select">
+
+<option value="name">Sort by Name</option>
+<option value="balance">Sort by Remaining Balance</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div id="cardsContainer" class="row"></div>
+
+</div>
+
+{% endblock %}
