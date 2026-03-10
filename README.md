@@ -180,11 +180,6 @@ pip install pymysql
 ## Database Configuration
 
 Update the MySQL connection string in *app.py*:
-
-
-mysql+pymysql://root:Password@123@localhost/insurance_dashboard
-
-
 Replace the username or password if necessary.
 
 ---
